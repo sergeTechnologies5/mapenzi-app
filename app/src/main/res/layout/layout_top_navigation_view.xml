@@ -1,0 +1,22 @@
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/white_grey_border_bottom"
+        app:elevation="32dp">
+        <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+            android:id="@+id/topNavViewBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            app:menu="@menu/top_navigation_toolbar">
+
+        </com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx>
+
+    </LinearLayout>
+
+</merge>
