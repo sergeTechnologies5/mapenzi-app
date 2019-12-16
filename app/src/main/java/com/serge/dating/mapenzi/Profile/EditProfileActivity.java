@@ -126,36 +126,28 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         loadUserProfile();
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        back.setOnClickListener(v -> onBackPressed());
 
-        genderFemale.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                if(genderMan){
-                    genderMan = false;
-                }else{
-                    genderMan = true;
-                }
-            }
-        });
+        genderFemale.setOnCheckedChangeListener((buttonView, isChecked) ->{
 
-        genderMale.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                if(genderMan){
-                    genderMan = false;
-                }else{
-                    genderMan = true;
-                }
+
+            if (isChecked) {
+                genderFemale.setChecked(true);
+                genderMale.setChecked(false);
+                genderMan = false;
             }
-        });
+        } );
+
+
+        genderMale.setOnCheckedChangeListener((buttonView, isChecked) ->{
+
+
+            if (isChecked) {
+                genderFemale.setChecked(false);
+                genderMale.setChecked(true);
+                genderMan = true;
+            }
+        } );
 
         imageViews.add(imageView1);imageViews.add(imageView2);imageViews.add(imageView3);
         imageViews.add(imageView4);imageViews.add(imageView5);imageViews.add(imageView6);

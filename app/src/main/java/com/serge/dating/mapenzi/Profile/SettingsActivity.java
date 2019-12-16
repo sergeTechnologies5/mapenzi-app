@@ -127,13 +127,10 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        displayMen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    displayMen.setChecked(true);
-                    displayWomen.setChecked(false);
-                }
+        displayMen.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                displayMen.setChecked(true);
+                displayWomen.setChecked(false);
             }
         });
         displayWomen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -145,21 +142,17 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
-        rangeSeekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener() {
-            @Override
-            public void onRangeSeekBarValuesChanged(RangeSeekBar bar, Object minValue, Object maxValue) {
-                age_rnge.setText(minValue + "-" + maxValue);
-                minAgeLimit = Integer.valueOf(minValue.toString());
-                maxAgeLimit =Integer.valueOf(maxValue.toString());
+        rangeSeekBar.setOnRangeSeekBarChangeListener((bar, minValue, maxValue) -> {
 
-            }
+            int min = (int) minValue;
+
+            int x =(min<18)?18: (int)minValue;
+            age_rnge.setText(x + "-" + maxValue);
+            minAgeLimit = Integer.valueOf(x);
+            maxAgeLimit =Integer.valueOf(maxValue.toString());
+
         });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        back.setOnClickListener(v -> onBackPressed());
 
 
     }

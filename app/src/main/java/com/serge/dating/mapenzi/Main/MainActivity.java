@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
     private FirebaseUser mFirebaseUser;
-
+    private User user;
     private FirebaseAuth mAuth;
 
     private CircleImageView profileImage;
@@ -89,6 +89,18 @@ public class MainActivity extends AppCompatActivity
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mFirebaseUser = mAuth.getCurrentUser();
 
+        String userId = mAuth.getCurrentUser().getUid();
+        mDatabaseReference.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                 user = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         cardFrame = findViewById(R.id.card_frame);
         moreFrame = findViewById(R.id.more_frame);
 
@@ -132,7 +144,7 @@ public class MainActivity extends AppCompatActivity
                 String currentUserId = mAuth.getCurrentUser().getUid();
 
 
-                if (!uid.equals(currentUserId) && matchedUser.getEmail() != null) {
+                if (!uid.equals(currentUserId) && matchedUser.getEmail() != null && user.getProfile().getPreferSex().equals(matchedUser.getProfile().getSex())) {
 
                     matchedUser.setUser_id(uid);
                     rowItems.add(matchedUser);
